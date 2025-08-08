@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inscription — Anniversaire de Nicolas</title>
+  <meta name="description" content="Formulaire d'inscription à l'anniversaire de Nicolas — 20 août 2025, plage de Palavas.">
+  <link rel="icon" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-animated"></div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html"><span class="logo-dot"></span>AnnivNico</a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a class="cta" href="register.html">Je m'inscris</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container narrow reveal glass form-wrap">
+      <h1>Inscription</h1>
+      <p class="lead">Merci de renseigner ce formulaire pour confirmer votre venue.</p>
+
+      <form id="rsvpForm" class="form" method="post" action="/api/send">
+        <div class="grid-2">
+          <label>Prénom*
+            <input name="firstName" required autocomplete="given-name" />
+          </label>
+          <label>Nom*
+            <input name="lastName" required autocomplete="family-name" />
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label>E‑mail*
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+          <label>Téléphone
+            <input type="tel" name="phone" autocomplete="tel" />
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label>Nombre de personnes*
+            <input type="number" min="1" max="10" step="1" name="guests" required value="1" />
+          </label>
+          <label>Régime alimentaire
+            <select name="diet">
+              <option value="">— Aucun —</option>
+              <option>Végétarien</option>
+              <option>Vegan</option>
+              <option>Sans gluten</option>
+              <option>Sans porc</option>
+              <option>Autre (préciser)</option>
+            </select>
+          </label>
+        </div>
+
+        <label>Message
+          <textarea name="message" rows="4" placeholder="Allergies, préférences, covoiturage…"></textarea>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" name="consent" required />
+          <span>J'accepte que mes informations soient utilisées uniquement pour l'organisation de cet événement.</span>
+        </label>
+        <p class="muted tiny">Conformément au RGPD, vos données ne seront pas partagées et seront supprimées après l'événement.</p>
+
+        <button class="btn primary" type="submit">Envoyer mon inscription</button>
+        <div id="formStatus" role="status" class="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand foot"><span class="logo-dot"></span>AnnivNico</div>
+        <p class="muted small">© 2025 • Fête d'anniversaire de Nicolas • Palavas‑les‑Flots</p>
+      </div>
+      <div class="foot-actions">
+        <a class="btn tiny ghost" href="index.html">Retour</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
