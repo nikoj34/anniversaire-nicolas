@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "chat-messages": {
+      ".read": true,
+      ".write": "newData.child('name').isString() && newData.child('name').val().length <= 50 && newData.child('message').isString() && newData.child('message').val().length <= 300"
+    }
+  }
+}
