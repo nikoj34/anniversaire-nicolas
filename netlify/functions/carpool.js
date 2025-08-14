@@ -1,4 +1,4 @@
-// netlify/functions/send-email.js
+// netlify/functions/carpool.js
 const nodemailer = require('nodemailer');
 
 function escapeHtml(str = ''){
@@ -11,8 +11,8 @@ exports.handler = async (event) => {
   }
   try{
     const body = JSON.parse(event.body || '{}');
-    const { firstName, lastName, email, phone, guests, diet, message, consent } = body || {};
-    if(!firstName || !lastName || !email || !guests || !consent){
+    const { name, city, seats, contact, message } = body || {};
+    if(!name || !city || !seats || !contact){
       return { statusCode: 400, body: JSON.stringify({ error:'Champs requis manquants.' }) };
     }
 
@@ -23,28 +23,26 @@ exports.handler = async (event) => {
       auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
     });
 
-    const to = process.env.TO_EMAIL; // votre adresse
+    const to = process.env.TO_EMAIL;
     const html = `
-      <h2>Nouvelle inscription — Anniversaire de Nicolas</h2>
+      <h2>Proposition de covoiturage</h2>
       <ul>
-        <li><b>Nom:</b> ${escapeHtml(firstName)} ${escapeHtml(lastName)}</li>
-        <li><b>Email:</b> ${escapeHtml(email)}</li>
-        <li><b>Téléphone:</b> ${phone ? escapeHtml(phone) : '—'}</li>
-        <li><b>Invités:</b> ${escapeHtml(guests)}</li>
-        <li><b>Régime:</b> ${diet ? escapeHtml(diet) : '—'}</li>
+        <li><b>Nom:</b> ${escapeHtml(name)}</li>
+        <li><b>Ville de départ:</b> ${escapeHtml(city)}</li>
+        <li><b>Places disponibles:</b> ${escapeHtml(seats)}</li>
+        <li><b>Contact:</b> ${escapeHtml(contact)}</li>
         <li><b>Message:</b> ${message ? escapeHtml(message) : '—'}</li>
       </ul>
-      <p style="font-size:12px;color:#666">Consentement RGPD reçu: ${consent ? 'oui' : 'non'}</p>
     `;
 
     await transporter.sendMail({
       from: process.env.FROM_EMAIL || process.env.SMTP_USER,
       to,
-      subject: 'Inscription — Anniversaire de Nicolas',
+      subject: 'Covoiturage — Anniversaire de Nicolas',
       html
     });
 
-    return { statusCode: 200, body: JSON.stringify({ message:'Inscription envoyée. Merci !' }) };
+    return { statusCode: 200, body: JSON.stringify({ message:'Proposition envoyée. Merci !' }) };
   }catch(err){
     console.error(err);
     return { statusCode: 500, body: JSON.stringify({ error:'Erreur serveur: ' + err.message }) };
