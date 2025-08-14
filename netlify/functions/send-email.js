@@ -1,6 +1,11 @@
 // netlify/functions/send-email.js
 const nodemailer = require('nodemailer');
 
+function escapeHtml(str){
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' };
+  return str.replace(/[&<>"]/g, ch => map[ch]);
+}
+
 exports.handler = async (event) => {
   if(event.httpMethod !== 'POST'){
     return { statusCode: 405, body: JSON.stringify({ error:'Method not allowed' }) };
@@ -28,7 +33,7 @@ exports.handler = async (event) => {
         <li><b>Téléphone:</b> ${phone || '—'}</li>
         <li><b>Invités:</b> ${guests}</li>
         <li><b>Régime:</b> ${diet || '—'}</li>
-        <li><b>Message:</b> ${message ? message.replace(/</g,'&lt;') : '—'}</li>
+        <li><b>Message:</b> ${message ? escapeHtml(message) : '—'}</li>
       </ul>
       <p style="font-size:12px;color:#666">Consentement RGPD reçu: ${consent ? 'oui' : 'non'}</p>
     `;
