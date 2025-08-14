@@ -131,3 +131,30 @@ nav a.cta{ padding:8px 14px; border-radius:12px; background:linear-gradient(45de
   .cards-3{ grid-template-columns: 1fr; }
   .grid-2{ grid-template-columns: 1fr; }
 }
+
+/* chat styles */
+.chat-box{
+  display:flex;
+  flex-direction:column;
+  height:60vh;
+}
+#messages{
+  list-style:none;
+  padding:0;
+  margin:0 0 12px 0;
+  flex:1;
+  overflow-y:auto;
+}
+#messages li{
+  margin-bottom:8px;
+  padding:8px 12px;
+  background:rgba(255,255,255,.06);
+  border-radius:12px;
+}
+.chat-form{
+  display:flex;
+  gap:8px;
+}
+.chat-form input{
+  flex:1;
+}

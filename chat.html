@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat cadeaux — Anniversaire de Nicolas</title>
+  <meta name="description" content="Échangez des idées de cadeaux pour Nicolas en temps réel.">
+  <link rel="icon" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-animated"></div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html"><span class="logo-dot"></span>AnnivNico</a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="chat.html">Chat cadeaux</a>
+        <a class="cta" href="register.html">Je m'inscris</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container narrow reveal glass form-wrap">
+      <h1>Chat cadeaux 🎁</h1>
+      <p class="lead">Discutez en direct des idées de cadeaux.</p>
+      <div class="chat-box">
+        <ul id="messages"></ul>
+        <form id="chat-form" class="chat-form">
+          <input type="text" id="message-input" placeholder="Votre message..." required />
+          <button type="submit" class="btn primary">Envoyer</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand foot"><span class="logo-dot"></span>AnnivNico</div>
+        <p class="muted small">© 2025 • Fête d'anniversaire de Nicolas • Palavas‑les‑Flots</p>
+      </div>
+      <div class="foot-actions">
+        <a class="btn tiny" href="register.html">S'inscrire</a>
+        <a class="btn tiny ghost" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Haut de page</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="module" src="chat.js"></script>
+</body>
+</html>
