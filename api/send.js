@@ -2,7 +2,8 @@
 import nodemailer from 'nodemailer';
 
 function escapeHtml(str = ''){
-  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+    const map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+    return String(str).replace(/[&<>"']/g, c => map[c]);
 }
 
 export default async function handler(req, res){
