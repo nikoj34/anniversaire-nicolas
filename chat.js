@@ -17,7 +17,8 @@ const db = getDatabase(app);
 const messagesRef = ref(db, 'chat-messages');
 
 function escapeHtml(str){
-  return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+  const map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+  return str.replace(/[&<>"']/g, c => map[c]);
 }
 
 const list = document.getElementById('chatList');
