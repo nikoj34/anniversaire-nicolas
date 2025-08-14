@@ -45,6 +45,11 @@ form.addEventListener('submit', async e => {
     statusEl.textContent = 'Nom et message requis.';
     return;
   }
+  if(name.length > 50 || message.length > 300){
+    statusEl.className = 'status err';
+    statusEl.textContent = 'Nom max 50 et message max 300 caractères.';
+    return;
+  }
   try{
     await push(messagesRef, { name, message });
     msgInput.value = '';
