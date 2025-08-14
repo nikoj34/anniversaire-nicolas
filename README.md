@@ -44,8 +44,8 @@ TO_EMAIL=VOTRE_ADRESSE_PERSONNELLE@exemple.fr   # ← modifiez‑moi
 NETLIFY_FUNCTIONS=netlify/functions
 ```
 
-3) Les points d’API seront `/.netlify/functions/send-email` et `/.netlify/functions/carpool`.
-4) Modifiez dans `register.html` et `carpool.html` l’attribut `action` des formulaires :
+3) Les points d’API seront `/.netlify/functions/send-email` et `/.netlify/functions/carpool` (au lieu de `/api/send` et `/api/carpool` utilisés par Vercel).
+4) Modifiez donc dans `register.html` et `carpool.html` l’attribut `action` des formulaires :
 ```
 action="/.netlify/functions/send-email"
 action="/.netlify/functions/carpool"
