@@ -1,6 +1,11 @@
 // api/send.js — Vercel Serverless Function (Node.js)
 import nodemailer from 'nodemailer';
 
+function escapeHtml(str){
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' };
+  return str.replace(/[&<>"]/g, ch => map[ch]);
+}
+
 export default async function handler(req, res){
   if(req.method !== 'POST') return res.status(405).json({ error:'Method not allowed' });
   try{
@@ -26,7 +31,7 @@ export default async function handler(req, res){
         <li><b>Téléphone:</b> ${phone || '—'}</li>
         <li><b>Invités:</b> ${guests}</li>
         <li><b>Régime:</b> ${diet || '—'}</li>
-        <li><b>Message:</b> ${message ? message.replace(/</g,'&lt;') : '—'}</li>
+        <li><b>Message:</b> ${message ? escapeHtml(message) : '—'}</li>
       </ul>
       <p style="font-size:12px;color:#666">Consentement RGPD reçu: ${consent ? 'oui' : 'non'}</p>
     `;
