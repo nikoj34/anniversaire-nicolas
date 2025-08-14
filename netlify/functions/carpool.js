@@ -10,6 +10,12 @@ exports.handler = async (event) => {
   if(event.httpMethod !== 'POST'){
     return { statusCode: 405, body: JSON.stringify({ error:'Method not allowed' }) };
   }
+  const requiredEnv = ['SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASS','TO_EMAIL'];
+  const missingEnv = requiredEnv.filter(name => !process.env[name]);
+  if(missingEnv.length){
+    const msg = 'Variables d\'environnement manquantes: ' + missingEnv.join(', ');
+    return { statusCode: 500, body: JSON.stringify({ error: msg }) };
+  }
   try{
     const body = JSON.parse(event.body || '{}');
     const { name, city, seats, contact, message } = body || {};

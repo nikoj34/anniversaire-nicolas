@@ -8,6 +8,13 @@ function escapeHtml(str = ''){
 
 export default async function handler(req, res){
   if(req.method !== 'POST') return res.status(405).json({ error:'Method not allowed' });
+
+  const requiredEnv = ['SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASS','TO_EMAIL'];
+  const missingEnv = requiredEnv.filter(name => !process.env[name]);
+  if(missingEnv.length){
+    return res.status(500).json({ error:'Variables d\'environnement manquantes: ' + missingEnv.join(', ') });
+  }
+
   try{
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const { name, city, seats, contact, message } = body || {};

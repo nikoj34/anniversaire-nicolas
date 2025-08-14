@@ -14,6 +14,16 @@ Ce package contient :
 - `netlify/functions/carpool.js` — fonction Netlify pour le covoiturage.
 - `assets/favicon.png` — favicon.
 
+## Variables d’environnement
+
+Les fonctions d’envoi d’e‑mails nécessitent ces variables d’environnement :
+
+- `SMTP_HOST` — hôte SMTP.
+- `SMTP_PORT` — port du serveur.
+- `SMTP_USER` — identifiant SMTP.
+- `SMTP_PASS` — mot de passe SMTP.
+- `TO_EMAIL` — adresse destinataire.
+
 ## Déploiement rapide (Vercel, conseillé)
 
 1) Créez un compte sur vercel.com puis **Import Project** → **Add New…** → **Project**.  
