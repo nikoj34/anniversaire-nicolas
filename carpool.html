@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Covoiturage — Anniversaire de Nicolas</title>
+  <meta name="description" content="Proposez ou trouvez un covoiturage pour l'anniversaire de Nicolas.">
+  <link rel="icon" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-animated"></div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html"><span class="logo-dot"></span>AnnivNico</a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="carpool.html">Covoiturage</a>
+        <a href="chat.html">Chat cadeaux</a>
+        <a class="cta" href="register.html">Je m'inscris</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container narrow reveal glass form-wrap">
+      <h1>Covoiturage</h1>
+      <p class="lead">Proposez vos places ou trouvez un trajet partagé.</p>
+
+      <form id="carpoolForm" class="form" method="post" action="/.netlify/functions/carpool">
+        <label>Nom*
+          <input name="name" required />
+        </label>
+        <label>Ville de départ*
+          <input name="city" required />
+        </label>
+        <div class="grid-2">
+          <label>Places disponibles*
+            <input type="number" name="seats" min="1" max="10" required />
+          </label>
+          <label>Contact (email ou téléphone)*
+            <input name="contact" required />
+          </label>
+        </div>
+        <label>Message
+          <textarea name="message" rows="3" placeholder="Précisions (heure, trajet...)"></textarea>
+        </label>
+        <button class="btn primary" type="submit">Envoyer</button>
+        <div class="status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand foot"><span class="logo-dot"></span>AnnivNico</div>
+        <p class="muted small">© 2025 • Fête d'anniversaire de Nicolas • Palavas‑les‑Flots</p>
+      </div>
+      <div class="foot-actions">
+        <a class="btn tiny ghost" href="index.html">Retour</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

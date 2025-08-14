@@ -1,13 +1,17 @@
-# Anniversaire de Nicolas — Site 2 pages (responsive, animé)
+# Anniversaire de Nicolas — Site multi-pages (responsive, animé)
 
 Ce package contient :
 
 - `index.html` — page d’accueil avec *hero*, compte à rebours, programme et CTA.
 - `register.html` — formulaire d’inscription (RGPD) avec envoi e‑mail.
+- `carpool.html` — proposition de covoiturage (envoi e‑mail).
+- `chat.html` — petit chat temps réel pour discuter des cadeaux (Firebase).
 - `styles.css` — design moderne (verre, dégradés animés, reveal on scroll).
 - `script.js` — compte à rebours + soumission AJAX + animations.
 - `api/send.js` — fonction serverless pour **Vercel** (e‑mail via SMTP).
+- `api/carpool.js` — fonction serverless Vercel pour le covoiturage.
 - `netlify/functions/send-email.js` — alternative **Netlify** (SMTP).
+- `netlify/functions/carpool.js` — fonction Netlify pour le covoiturage.
 - `assets/favicon.png` — favicon.
 
 ## Déploiement rapide (Vercel, conseillé)
@@ -40,17 +44,20 @@ TO_EMAIL=VOTRE_ADRESSE_PERSONNELLE@exemple.fr   # ← modifiez‑moi
 NETLIFY_FUNCTIONS=netlify/functions
 ```
 
-3) Le point d’API sera `/.netlify/functions/send-email`.  
-4) Modifiez dans `register.html` l’attribut `action` du `<form>` :
+3) Les points d’API seront `/.netlify/functions/send-email` et `/.netlify/functions/carpool`.
+4) Modifiez dans `register.html` et `carpool.html` l’attribut `action` des formulaires :
 ```
 action="/.netlify/functions/send-email"
+action="/.netlify/functions/carpool"
 ```
 
 ## Personnalisation
 
 - **Couleurs/typographie** : dans `styles.css` (variables CSS en tête de fichier).  
-- **Texte & sections** : modifiez `index.html`.  
-- **RGPD** : texte dans `register.html`. Ajoutez un lien vers votre politique si besoin.  
+- **Texte & sections** : modifiez `index.html`.
+- **Covoiturage** : ajustez `carpool.html` et les fonctions `api/carpool.js` / `netlify/functions/carpool.js`.
+- **Chat** : fournissez votre configuration Firebase dans `chat.js`.
+- **RGPD** : texte dans `register.html`. Ajoutez un lien vers votre politique si besoin.
 - **Anti‑spam** : vous pouvez ajouter un champ *honeypot* caché ou un reCAPTCHA v3 côté client + vérif côté serveur.
 
 ## Local

@@ -22,34 +22,44 @@
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 
-// Form: progressive enhancement (AJAX). Requires a backend at /api/send
-(() => {
-  const form = document.getElementById('rsvpForm');
-  if(!form) return;
-  const status = document.getElementById('formStatus');
-  form.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    status.className = 'status';
-    status.textContent = 'Envoi en cours…';
-    const data = Object.fromEntries(new FormData(form).entries());
-    if(!data.consent){ status.className = 'status err'; status.textContent = 'Veuillez accepter la mention RGPD.'; return; }
-    try{
-      const res = await fetch(form.action, {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json' },
-        body: JSON.stringify(data)
-      });
-      const payload = await res.json().catch(()=>({}));
-      if(res.ok){
-        status.className = 'status ok';
-        status.textContent = payload.message || 'Merci ! Votre inscription a bien été envoyée.';
-        form.reset();
-      }else{
-        throw new Error(payload.error || 'Erreur lors de l’envoi. Réessayez plus tard.');
+// Forms: progressive enhancement (AJAX)
+(()=>{
+  function setupAjaxForm(id){
+    const form = document.getElementById(id);
+    if(!form) return;
+    const status = form.querySelector('.status');
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      if(!status) return;
+      status.className = 'status';
+      status.textContent = 'Envoi en cours…';
+      const data = Object.fromEntries(new FormData(form).entries());
+      const consentBox = form.querySelector('input[name="consent"]');
+      if(consentBox && !consentBox.checked){
+        status.className = 'status err';
+        status.textContent = 'Veuillez accepter la mention RGPD.';
+        return;
       }
-    }catch(err){
-      status.className = 'status err';
-      status.textContent = err.message;
-    }
-  });
+      try{
+        const res = await fetch(form.action, {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json' },
+          body: JSON.stringify(data)
+        });
+        const payload = await res.json().catch(()=>({}));
+        if(res.ok){
+          status.className = 'status ok';
+          status.textContent = payload.message || 'Merci !';
+          form.reset();
+        }else{
+          throw new Error(payload.error || 'Erreur lors de l’envoi. Réessayez plus tard.');
+        }
+      }catch(err){
+        status.className = 'status err';
+        status.textContent = err.message;
+      }
+    });
+  }
+
+  ['rsvpForm', 'carpoolForm', 'chatForm'].forEach(setupAjaxForm);
 })();
