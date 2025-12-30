@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.traduction.video</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/bash</string>
+      <string>-lc</string>
+      <string>cd /PATH/TO/intranet && source .venv/bin/activate && uvicorn app.main:app --host 0.0.0.0 --port 8000</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/traduction-video.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/traduction-video.err.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>TRANSLATE_SCRIPT</key>
+      <string>/PATH/TO/intranet/traduis_video_auto.sh</string>
+      <key>APP_TOKEN</key>
+      <string>change-moi</string>
+    </dict>
+  </dict>
+</plist>

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Job {{ job_id }}</h2>
+  <div id="job-status" class="status"></div>
+  <div class="progress">
+    <div id="progress-bar" class="progress-bar"></div>
+  </div>
+  <div class="progress-steps" id="progress-steps"></div>
+  <div class="actions">
+    <button id="open-output" class="secondary">Ouvrir le dossier de sortie</button>
+  </div>
+</section>
+
+<section class="card">
+  <h3>Logs</h3>
+  <pre id="job-log" class="log"></pre>
+</section>
+
+<section class="card">
+  <h3>Résultats</h3>
+  <div id="job-results" class="results"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.JOB_ID = "{{ job_id }}";
+</script>
+{% endblock %}

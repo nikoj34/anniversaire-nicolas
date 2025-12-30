@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Lancer une traduction</h2>
+  <form id="job-form" class="form" enctype="multipart/form-data">
+    <div class="field">
+      <label for="youtube-url">URL YouTube</label>
+      <input type="url" id="youtube-url" name="url" placeholder="https://www.youtube.com/watch?v=..." />
+    </div>
+
+    <div class="divider">OU</div>
+
+    <div class="field">
+      <label for="video-file">Déposer un fichier vidéo</label>
+      <div id="drop-zone" class="drop-zone">
+        <p>Glissez-déposez ici ou cliquez pour choisir un fichier.</p>
+        <input type="file" id="video-file" name="file" accept="video/*" />
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label for="voice">Voix macOS</label>
+        <select id="voice" name="voice">
+          {% for voice in voices %}
+          <option value="{{ voice }}" {% if voice == default_voice %}selected{% endif %}>{{ voice }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="model">Modèle Whisper</label>
+        <select id="model" name="model">
+          {% for model in models %}
+          <option value="{{ model }}" {% if model == default_model %}selected{% endif %}>{{ model }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="primary">Lancer la traduction</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Derniers jobs</h2>
+  <div id="jobs-preview" class="jobs-preview"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.APP_CONFIG = {
+    tokenRequired: {{ 'true' if token_required else 'false' }}
+  };
+</script>
+{% endblock %}
