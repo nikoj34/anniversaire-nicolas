@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Journal alimentaire</title>
+</head>
+<body>
+  <h1>Journal alimentaire</h1>
+  <form id="entry-form">
+    <fieldset>
+      <legend>Repas</legend>
+      <label>Heure: <input type="time" id="mealTime" required></label>
+      <label>Type: <select id="mealType">
+        <option>En-cas</option>
+        <option>Midi</option>
+        <option>Soir</option>
+      </select></label>
+      <label>Aliments: <input type="text" id="foodItems" required></label>
+    </fieldset>
+    <fieldset>
+      <legend>Selles</legend>
+      <label>Heure: <input type="time" id="stoolTime" required></label>
+      <label>Type (Bristol): <select id="stoolType"></select></label>
+    </fieldset>
+    <button type="submit">Enregistrer</button>
+  </form>
+  <script src="app.js"></script>
+</body>
+</html>
